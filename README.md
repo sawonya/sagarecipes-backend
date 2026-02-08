@@ -1,210 +1,154 @@
-SagaRecipes — Recipe Sharing Website (Backend)
-Project Description
+# 🍰 Sagarecipes — Recipe Sharing Backend
 
-SagaRecipes is a backend REST API for a recipe sharing website.
-The application allows users to register and log in, create and manage their own recipes, and explore recipes from an external API.
+Sagarecipes is a backend application for a recipe-sharing platform where users can register, log in, create and manage their own recipes, and explore recipes from an external API (TheMealDB).
 
-The backend is built using Node.js, Express, and MongoDB.
-JWT is used for authentication and authorization.
-The project is deployed on Render, with MongoDB Atlas as the production database.
+The backend is built using **Node.js**, **Express**, and **MongoDB**.  
+Authentication and authorization are implemented using **JWT**.  
+The project is deployed on **Render** with **MongoDB Atlas** as the production database.
 
-Technologies Used
+---
 
-Node.js
+## 🚀 Deployment
 
-Express.js
+**Backend is deployed on Render:**
 
-MongoDB
+🔗 https://sagarecipes-backend.onrender.com
 
-Mongoose
+**Example endpoint:**
+GET https://sagarecipes-backend.onrender.com/api/recipes
 
-JSON Web Token (JWT)
 
-bcryptjs
+---
 
-MongoDB Atlas
+## 🛠 Technologies Used
 
-Render
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JSON Web Token (JWT)
+- bcryptjs (password hashing)
+- MongoDB Atlas (cloud database)
+- Render (deployment)
+- Postman (API testing)
 
-Postman (API testing)
+---
 
-Project Structure
+## 📂 Project Structure
+
 recipe-backend/
 │
 ├── config/
-│   └── db.js                # MongoDB connection
+│ └── db.js # MongoDB connection
 │
 ├── controllers/
-│   ├── authController.js    # User registration and login logic
-│   ├── recipeController.js # CRUD operations for recipes
-│   └── userController.js   # User profile logic
+│ ├── authController.js # User registration & login
+│ ├── recipeController.js # CRUD operations for recipes
+│ └── userController.js # User profile logic
 │
 ├── middleware/
-│   └── authMiddleware.js   # JWT authentication middleware
+│ └── authMiddleware.js # JWT authentication middleware
 │
 ├── models/
-│   ├── User.js              # User schema
-│   └── Recipe.js            # Recipe schema
+│ ├── User.js # User schema
+│ └── Recipe.js # Recipe schema
 │
 ├── routes/
-│   ├── authRoutes.js        # Authentication routes
-│   ├── recipeRoutes.js     # Recipe routes
-│   └── userRoutes.js       # User profile routes
+│ ├── authRoutes.js # Authentication routes
+│ ├── recipeRoutes.js # Recipe routes
+│ └── userRoutes.js # User profile routes
 │
-├── server.js                # Main server file
+├── server.js # Main server file
 ├── package.json
-└── README.md
+├── README.md
 
-Authentication and Security
 
-User passwords are hashed using bcrypt
+---
 
-Authentication is implemented with JSON Web Tokens (JWT)
+## 🔐 Authentication
 
-Protected routes require a valid JWT token
+- Passwords are **hashed using bcrypt**
+- JWT is generated on login
+- Protected routes require a valid JWT token in headers
 
-Only the owner of a recipe can update or delete it
+**Authorization header example:**
+Authorization: Bearer <your_token>
 
-User Features
 
-Register a new user
+---
 
-Log in using email and password
+## 📡 API Endpoints
 
-View user profile (protected route)
+### 🔑 Authentication (Public)
 
-Update user profile (protected route)
+| Method | Endpoint              | Description             |
+|------:|-----------------------|-------------------------|
+| POST  | /api/auth/register    | Register a new user     |
+| POST  | /api/auth/login       | Login user              |
 
-Recipe Features
+---
 
-Create a recipe (authenticated users only)
+### 👤 User Profile (Private)
 
-View all recipes
+| Method | Endpoint              | Description                    |
+|------:|-----------------------|--------------------------------|
+| GET   | /api/users/profile    | Get logged-in user profile     |
+| PUT   | /api/users/profile    | Update user profile            |
 
-View a single recipe by ID
+---
 
-Update a recipe (only by the recipe owner)
+### 🍽 Recipes (Private)
 
-Delete a recipe (only by the recipe owner)
+| Method | Endpoint               | Description               |
+|------:|------------------------|---------------------------|
+| POST  | /api/recipes           | Create a new recipe       |
+| GET   | /api/recipes           | Get all recipes           |
+| GET   | /api/recipes/:id       | Get recipe by ID          |
+| PUT   | /api/recipes/:id       | Update recipe             |
+| DELETE| /api/recipes/:id       | Delete recipe             |
 
-Each recipe is linked to the user who created it.
+---
 
-External API Integration
+## 🧪 API Testing
 
-The project integrates TheMealDB API to:
+All endpoints were tested using **Postman**.
 
-Search for external recipes
+Testing includes:
+- User registration and login
+- JWT-protected routes
+- CRUD operations for recipes
+- User profile access
 
-View full recipe details from the external API
+---
 
-API Endpoints
-Authentication
+## 🔐 Environment Variables
 
-POST /api/auth/register
+The following environment variables are required:
 
-POST /api/auth/login
-
-User (Protected)
-
-GET /api/users/profile
-
-PUT /api/users/profile
-
-Recipes
-
-GET /api/recipes
-
-GET /api/recipes/:id
-
-POST /api/recipes (JWT required)
-
-PUT /api/recipes/:id (JWT required, owner only)
-
-DELETE /api/recipes/:id (JWT required, owner only)
-
-API Testing
-
-The API was tested using Postman, including:
-
-User authentication
-
-Access to protected routes
-
-CRUD operations for recipes
-
-Error handling (401, 403, 404)
-
-Database
-
-MongoDB Atlas is used as the production database
-
-MongoDB Compass is used for viewing and managing data
-
-Local development can use a local MongoDB instance
-
-Passwords are stored in hashed form and never saved as plain text
-
-Deployment
-
-The backend is deployed on Render.
-
-Production URL:
-https://sagarecipes-backend.onrender.com
-
-Example request:
-GET https://sagarecipes-backend.onrender.com/api/recipes
-
-Environment Variables
-
-Sensitive data is stored using environment variables:
-
+PORT=10000
 MONGO_URI=your_mongodb_atlas_connection_string
 JWT_SECRET=your_secret_key
 NODE_ENV=production
 
-How to Run Locally
 
-Clone the repository
+These variables are configured on **Render** and are not stored in the repository.
 
-Install dependencies:
+---
 
-npm install
+## ✅ Features Summary
 
+- User authentication (register/login)
+- JWT-based authorization
+- Secure password hashing
+- Full CRUD for recipes
+- User-specific recipes
+- External API integration (TheMealDB)
+- Cloud database (MongoDB Atlas)
+- Backend deployment on Render
 
-Create a .env file:
+---
 
-MONGO_URI=mongodb://localhost:27017/sagarecipes
-JWT_SECRET=your_secret_key
+## 👩‍💻 Author
 
-
-Run the server:
-
-node server.js
-
-
-The server will run at:
-http://localhost:5000
-
-Project Status
-
-Backend completed
-
-Authentication and authorization implemented
-
-CRUD operations completed
-
-External API integration completed
-
-Deployment completed
-
-Author
-
-SagaRecipes — Final Web Development Project
- Deployment
-The backend is deployed on Render.
-
-Production URL:
-https://sagarecipes-backend.onrender.com
-
-Example:
-GET https://sagarecipes-backend.onrender.com/api/recipes
+**Kairat Sagynysh**  
+Final Project — Web Technologies
