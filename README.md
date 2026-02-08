@@ -62,6 +62,7 @@ recipe-backend/
 ├── package.json
 └── README.md
 
+```
 ---
 
 ## 🔐 Authentication
