@@ -36,32 +36,31 @@ GET https://sagarecipes-backend.onrender.com/api/recipes
 
 ## 📂 Project Structure
 
+```text
 recipe-backend/
-│
 ├── config/
-│ └── db.js # MongoDB connection
+│   └── db.js                 # MongoDB connection
 │
 ├── controllers/
-│ ├── authController.js # User registration & login
-│ ├── recipeController.js # CRUD operations for recipes
-│ └── userController.js # User profile logic
+│   ├── authController.js     # User registration & login
+│   ├── recipeController.js   # CRUD operations for recipes
+│   └── userController.js     # User profile logic
 │
 ├── middleware/
-│ └── authMiddleware.js # JWT authentication middleware
+│   └── authMiddleware.js     # JWT authentication middleware
 │
 ├── models/
-│ ├── User.js # User schema
-│ └── Recipe.js # Recipe schema
+│   ├── User.js               # User schema
+│   └── Recipe.js             # Recipe schema
 │
 ├── routes/
-│ ├── authRoutes.js # Authentication routes
-│ ├── recipeRoutes.js # Recipe routes
-│ └── userRoutes.js # User profile routes
+│   ├── authRoutes.js         # Authentication routes
+│   ├── recipeRoutes.js       # Recipe routes
+│   └── userRoutes.js         # User profile routes
 │
-├── server.js # Main server file
+├── server.js                 # Main server file
 ├── package.json
-├── README.md
-
+└── README.md
 
 ---
 
