@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>sagarecipes</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- HERO -->
+    <section class="hero">
+        <header class="nav">
+            <div class="logo">
+                <img src="images/logo.jpg" alt="sagarecipes">
+                <span>sagarecipes</span>
+            </div>
+            <nav id="nav-links"></nav>
+        </header>
+
+        <!-- HERO TEXT -->
+        <div class="hero-content">
+            <h1>sagarecipes</h1>
+            <p>Share recipes with love</p>
+        </div>
+    </section>
+
+    <!-- ALL RECIPES -->
+    <section class="container recipes-section">
+        <h2>All recipes</h2>
+        <div id="recipes-list"></div>
+    </section>
+
+    <!-- EXTERNAL -->
+    <section class="container external-section">
+        <h3>External recipes</h3>
+
+        <div class="external-search">
+            <input id="search" placeholder="Search (TheMealDB)" />
+            <button class="btn primary" onclick="searchExternal()">Search</button>
+        </div>
+
+        <div id="external"></div>
+    </section>
+
+    <script>
+        const nav = document.getElementById("nav-links");
+        const token = localStorage.getItem("token");
+
+        nav.innerHTML = token
+            ? `<a href="add-recipe.html">Add recipe</a>
+               <a href="#" onclick="logout()">Logout</a>`
+            : `<a href="login.html">Login</a>
+               <a href="register.html">Register</a>`;
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = "login.html";
+        }
+    </script>
+
+    <script src="js/recipes.js"></script>
+    <script src="js/external.js"></script>
+</body>
+
+</html>

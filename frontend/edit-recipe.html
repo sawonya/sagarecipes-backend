@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Edit recipe</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="edit-page">
+
+    <!-- TOP BAR -->
+    <header class="nav">
+        <div class="logo">
+            <strong>sagarecipes</strong>
+        </div>
+        <a href="/" style="color:white; text-decoration:none;">Back</a>
+    </header>
+
+    <!-- EDIT CARD -->
+    <div class="edit-card">
+        <h2>Edit recipe</h2>
+
+        <form id="editForm">
+            <input id="title" placeholder="Title" />
+            <textarea id="ingredients" placeholder="Ingredients"></textarea>
+            <textarea id="instructions" placeholder="Instructions"></textarea>
+            <input id="image" placeholder="Image URL" />
+
+            <div class="edit-actions">
+                <button type="button" class="save-btn" onclick="save()">
+                    Save changes
+                </button>
+
+                <button type="button" class="cancel-btn" onclick="history.back()">
+                    Cancel
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const id = new URLSearchParams(window.location.search).get("id");
+        const token = localStorage.getItem("token");
+
+        fetch(`/api/recipes/${id}`)
+            .then(res => res.json())
+            .then(r => {
+                title.value = r.title;
+                ingredients.value = r.ingredients;
+                instructions.value = r.instructions;
+                image.value = r.image || "";
+            });
+
+        function save() {
+            fetch(`/api/recipes/${id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    title: title.value,
+                    ingredients: ingredients.value,
+                    instructions: instructions.value,
+                    image: image.value
+                })
+            }).then(() => {
+                window.location.href = "/";
+            });
+        }
+    </script>
+
+</body>
+
+</html>
